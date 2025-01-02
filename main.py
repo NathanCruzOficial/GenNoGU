@@ -23,7 +23,7 @@ class App(ctk.CTk):
         self.geometry("294x390")  # Define o tamanho da janela
         self.title("Gerar Nomes de Guerra")  # Define o título da janela
         self.resizable(False, False) # Define se a Janela será 
-        self.iconbitmap("img/ico.ico")
+        self.iconbitmap("ico.ico")
 
         #====================================================
         # Variáveis
