@@ -1,0 +1,8 @@
+import base64
+from PIL import Image
+import io
+
+codB64 = "iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAABVUlEQVR4nO3Zv0tVYRjA8SMKuiQojWJd/wYHh4SkvyJwiLaGQGnQ/8FfQw4OLja6hksObQmuvZPg0lga5aLR8AmhQc5g5+R5732F5wPv+nC+5zlwuedUVQghhJABHuIN3mH/H2cHixirSoJn+K69L3halQCPcOH//carEkK2dGMbI4MMOdKdD5gYVEjqMOR61uPa/DmstDyvMY+hQYQcYLw2+wWu7jDzGL1+hmxg+MbMYazpxmn9BuUI+YWXtXkP8F63VnOGfLt+jmuzevisex+bhOzisOV5i6nanCf4Ko9U9QOe4zJTRP4QjGJTfqnJxUxhpuWZxRJO+hDROKTLH8RcUoQUJsVGCpNiI4VJsZHCpNhIYVJspDApNnIfN3KkfJ+ahPTjH95drTcJmcZP5fpRf9FxW8wCzpXnrPVnC0xiGXsNPvTkPnt/r2WyVUQIIYRQNfMHObkgdiHUaNIAAAAASUVORK5CYII="
+
+image_data = base64.b64decode(codB64)
+pasta_img = Image.open(io.BytesIO(image_data))
