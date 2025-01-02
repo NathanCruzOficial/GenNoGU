@@ -32,7 +32,7 @@ def abrir_manualdeinstrucoes(self):
         wraplength=300,
         text_color="lightblue")
         ajuda.pack()
-        ajuda.bind("<Button-1>", abrir_link)
+        ajuda.bind("<Button-1>", abrir_link2)
 
         close_button = ctk.CTkButton(self.manual, text="Entendido", width=340,fg_color=cor.cinzaescuro,hover_color=cor.cinza,command=lambda:self.manual.destroy())
         close_button.pack(pady=10)
@@ -40,3 +40,7 @@ def abrir_manualdeinstrucoes(self):
 def abrir_link(self):
         # URL que será aberta
         webbrowser.open("https://linktr.ee/nathan_cruz")
+
+def abrir_link2(self):
+        # URL que será aberta
+        webbrowser.open("https://github.com/NathanCruzOficial/GenNoGU")

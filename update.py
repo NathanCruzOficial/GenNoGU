@@ -3,6 +3,7 @@ import requests
 import sys
 import shutil
 from tkinter import messagebox
+import json
 
 # Função para verificar a versão no GitHub
 def verificar_versao():
@@ -24,7 +25,10 @@ def verificar_versao():
 # Função para realizar o download e substituir o arquivo
 def atualizar_programa(update_url):
     arquivo_atual = sys.argv[0]  # O caminho do programa atual
-    nome_arquivo_novo = "novo_programa.exe"  # Nome do arquivo a ser salvo
+    nome_arquivo_novo = os.path.basename(arquivo_atual)  # Nome do arquivo automaticamente
+    print(f"Nome do arquivo atual: {nome_arquivo_novo}")
+
+    os._exit(0)  # Finaliza o processo atual
 
     # Baixar o novo arquivo
     resposta = requests.get(update_url)
@@ -39,29 +43,47 @@ def atualizar_programa(update_url):
         return False
     return True
 
+def salvar_versao(versao):
+    dados = {"versao": versao}
+    with open("versao.json", "w") as file:
+        json.dump(dados, file)
+
 # Função para reiniciar o programa
 def reiniciar_programa():
     arquivo_atual = sys.argv[0]
     os.startfile(arquivo_atual)  # Reexecuta o programa
     sys.exit()  # Fecha o programa atual
 
+
+def ler_versao():
+    with open("version.json", "r") as file:
+        dados = json.load(file)
+        print(f"Versão Atual: {dados['version']}")  # Exibe a versão armazenada
+        return dados['version']
+    
+def escrever_versao(versao_nova):
+    dados = {"version": versao_nova}
+    with open("versao.json", "w") as file:
+        json.dump(dados, file)
+
 # Função principal
 def main():
-    versao_atual = "1.0.0"  # Versão atual do programa
+    versao_atual = ler_versao()
     versao_nova, update_url = verificar_versao()
     
     if versao_nova and versao_nova != versao_atual:
         print(f"Nova versão disponível: {versao_nova}")
-        resposta = messagebox.askyesno("Atualização Disponível", "Uma nova atualização do sistema foi publicada, gostaria de atualizar agora?")
+        resposta = messagebox.askyesno("Atualização Disponível", f"Release: {versao_nova}\n\nUma nova atualização do sistema foi publicada, gostaria de atualizar agora?")
 
         if resposta:
             # Lógica para atualizar
              if atualizar_programa(update_url):
                 print("Atualização concluída. Reiniciando o programa...")
+                escrever_versao(versao_nova)
                 reiniciar_programa()
+        else:
+            return versao_atual
 
     else:
         print("Você já está usando a versão mais recente.")
-
-if __name__ == "__main__":
-    main()
+        return versao_atual

@@ -9,7 +9,7 @@ from app.manual import abrir_manualdeinstrucoes as manual
 from app.manual import abrir_link
 import update
 
-update.main()
+versao_atual = update.main()
 
 #----------------------------------------
 # Imagens
@@ -76,7 +76,7 @@ class App(ctk.CTk):
         self.start_gen_button.grid(row=6, column=0,columnspan=2, pady=10)
 
         ctk.CTkLabel(self.main_frame, text="Configurações").grid(row=4, column=0,columnspan=2, pady=5)
-        licenca = ctk.CTkLabel(self.main_frame, text="© 2024 - Nathan da Cruz Cardoso / Sd Ep Cruz", text_color="gray",cursor="hand2")
+        licenca = ctk.CTkLabel(self.main_frame, text=f"© 2025 - Nathan da Cruz Cardoso          {versao_atual}", text_color="gray",cursor="hand2")
         licenca.grid(row=7, column=0,columnspan=2)
         licenca.bind("<Button-1>", abrir_link)
   
